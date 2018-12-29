@@ -33,7 +33,7 @@ class Client:
         data = b''
         while not data.endswith(b'\n\n'):
             try:
-                data += self.connection.recv(1024)
+                data += self.connection.recv(4096)
             except socket.error:
                 raise ClientError('Cannot get data from server')
         data = data.decode().split('\n', 1)
