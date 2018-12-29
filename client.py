@@ -14,9 +14,9 @@ class Client:
 
     def put(self, key, value, timestamp=None):
         if timestamp is None:
-            timestamp = datetime.timestamp()
+            timestamp = time.time()
         try:
-            self.connection.sendall('put {} {} {}\n'.format(key, value, timestamp).encode(encoding = 'UTF-8'))
+            self.connection.sendall('put {} {} {}\n'.format(str(key), str(value), str(timestamp)).encode(encoding = 'UTF-8'))
         except socket.error:
             raise ClientError('Can not send data to server')
         self.feedback()
