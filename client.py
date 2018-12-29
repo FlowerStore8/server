@@ -1,5 +1,5 @@
 import socket
-import datetime
+import time
 
 
 class Client:
@@ -31,9 +31,7 @@ class Client:
 
     def feedback(self):
         data = b''
-        while True:
-            if data[len(data) - 2:] == b'\n\n':
-                break
+        while data[len(data) - 2:] != b'\n\n':
             try:
                 data += self.connection.recv(1024)
             except socket.error:
