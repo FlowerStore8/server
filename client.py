@@ -33,7 +33,7 @@ class Client:
         data = b''
         while not data.endswith(b'\n\n'):
             try:
-                data += self.connection.recv(4096)
+                data += self.connection.recv(1024)
             except socket.error:
                 raise ClientError('Cannot get data from server')
         data = data.decode().split('\n', 1)
@@ -48,16 +48,13 @@ class Client:
             return data
         feed = feed.split('\n')
         for item in feed:
-            try:
-                metric = item.split()
-                key = metric[0]
-                value = float(metric[1])
-                timestamp = int(metric[2])
-                if key not in data:
-                    data[key] = list()
-                data[key].append((timestamp, value))
-            except IndexError:
-                pass
+            metric = item.split()
+            key = metric[0]
+            value = float(metric[1])
+            timestamp = int(metric[2])
+            if key not in data:
+                data[key] = list()
+            data[key].append((timestamp, value))
         return data
 
 
