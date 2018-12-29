@@ -62,12 +62,6 @@ class Client:
                 pass
         return data
 
-    def close(self):
-        try:
-            self.connection.close()
-        except socket.error:
-            raise ClientError('Can not close connection')
-
 
 class ClientError(Exception):
     pass
