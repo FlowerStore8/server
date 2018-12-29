@@ -31,7 +31,7 @@ class Client:
 
     def feedback(self):
         data = b''
-        while data[len(data) - 2:] != b'\n\n':
+        while not data.endswith(b'\n\n'):
             try:
                 data += self.connection.recv(1024)
             except socket.error:
