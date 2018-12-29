@@ -12,7 +12,7 @@ class Client:
         except socket.error:
             raise ClientError('Can not create connection with server')
 
-    def put(self, key, value, timestamp):
+    def put(self, key, value, timestamp=None):
         if timestamp is None:
             timestamp = datetime.timestamp()
         try:
